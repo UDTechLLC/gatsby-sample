@@ -1,19 +1,64 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
+import _ from "lodash"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
+import IntroHeader from "../components/IntroHeader"
+import Events from "../components/Events"
+import { Link } from "../components/common"
+
+const eventsQuery = graphql`
+  {
+    allContentfulEvent {
+      edges {
+        node {
+          name
+          link
+          image {
+            file {
+              url
+            }
+          }
+          title
+          type
+          country,
+          city,
+          startDate,
+          endDate
+        }
+      }
+    }
+  }
+`
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+    <SEO title="Events page" />
+    <IntroHeader
+      title="Catch the Cypress team at these events"
+      subtitle={
+        <div>
+          {'To stay in the loop, subscribe to our newsletter or follow '}
+          <Link inner={false} href='https://twitter.com/Cypress_io' target='blank'>@Cypress_io</Link>
+          {' Twitter!'}
+        </div>
+      }
+    />
+
+    <StaticQuery // pass events to event component
+      query={eventsQuery}
+      render={events => (
+        <Events
+          events={
+            (events && events.allContentfulEvent)
+            && events.allContentfulEvent.edges
+            && _.uniqBy(events.allContentfulEvent.edges, o => o.name)
+          }
+        />
+      )}
+    />
+
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 )
