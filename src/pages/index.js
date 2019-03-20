@@ -49,16 +49,12 @@ const IndexPage = () => (
       query={eventsQuery}
       render={events => (
         <Events
-          events={
-            (events && events.allContentfulEvent)
-            && events.allContentfulEvent.edges
-            // && _.uniqBy(events.allContentfulEvent.edges, o => o.name)
-          }
+          events={(events && events.allContentfulEvent) && events.allContentfulEvent.edges}
         />
       )}
     />
 
-    <Link to="/page-2/">Go to page 2</Link>
+    {/* <Link to="/page-2/">Go to page 2</Link> */}
   </Layout>
 )
 

@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import moment from "moment"
 
 import { Link, Ribbon } from "./common"
@@ -72,44 +72,59 @@ const RibbonWrapper = styled.div`
   z-index: 5;
 `
 
-const CurrentEvent = ({ type, link, name, image, startDate, endDate, city, country }) => (
-  <Container href={link} target="_blank">
-    <EventImg style={{ backgroundImage: `url(${image}`}} />
+const CurrentEvent = withTheme(({ theme, type, link, name, image, startDate, endDate, city, country }) => {
+  const ribbonColor = type => {
+    switch (type.toLowerCase()) {
+      case "podcast":
+        return theme.highlightPurple;
+      case "meetup":
+        return theme.highlightOrange;
+      case "workshop":
+          return theme.highlightRed;
+      default:
+        return undefined;
+    }
+  }
 
-    <EventDetailsWrapper>
-      <EventDateBubble>
-        {
-          moment(startDate).format("MMMM") === moment(endDate).format("MMMM")
-            ? moment(startDate).format("MMMM")
-            : `${moment(startDate).format("MMM")} - ${moment(endDate).format("MMM")}`
-        }
+  return (
+    <Container href={link} target="_blank">
+      <EventImg style={{ backgroundImage: `url(${image}`}} />
 
-        <br />
-
-        {
-          moment(startDate).format("DD") === moment(endDate).format("DD")
-            ? moment(startDate).format("DD")
-            : `${moment(startDate).format("DD")} - ${moment(endDate).format("DD")}`
-        }
-      </EventDateBubble>
-
-      <div>
-        { name && <EventTitle>{ name }</EventTitle> }
-
-        <EventPlace>
+      <EventDetailsWrapper>
+        <EventDateBubble>
           {
-            city && country
-              ? `${city}, ${country}`
-              : 'Online'
+            moment(startDate).format("MMMM") === moment(endDate).format("MMMM")
+              ? moment(startDate).format("MMMM")
+              : `${moment(startDate).format("MMM")} - ${moment(endDate).format("MMM")}`
           }
-        </EventPlace>
-      </div>
 
-      <RibbonWrapper>
-        <Ribbon text={type} />
-      </RibbonWrapper>
-    </EventDetailsWrapper>
-  </Container>
-)
+          <br />
+
+          {
+            moment(startDate).format("DD") === moment(endDate).format("DD")
+              ? moment(startDate).format("DD")
+              : `${moment(startDate).format("DD")} - ${moment(endDate).format("DD")}`
+          }
+        </EventDateBubble>
+
+        <div>
+          { name && <EventTitle>{ name }</EventTitle> }
+
+          <EventPlace>
+            {
+              city && country
+                ? `${city}, ${country}`
+                : 'Online'
+            }
+          </EventPlace>
+        </div>
+
+        <RibbonWrapper>
+          <Ribbon text={type} color={ribbonColor(type)} />
+        </RibbonWrapper>
+      </EventDetailsWrapper>
+    </Container>
+  )
+})
 
 export default CurrentEvent;

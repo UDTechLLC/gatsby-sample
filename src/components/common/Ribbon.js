@@ -40,8 +40,8 @@ const RibbonWrapper = withTheme(styled.div`
   }
 `)
 
-const Ribbon = ({ text }) => (
-  <RibbonWrapper>
+const Ribbon = ({ text, color }) => (
+  <RibbonWrapper color={color}>
     { text && text.toLowerCase() }
   </RibbonWrapper>
 )

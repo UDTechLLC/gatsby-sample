@@ -230,7 +230,13 @@ export default class Events extends Component {
               && (
                 <Select
                   options={pastFilters}
-                  styles={customSelectStyles}
+                  styles={{
+                    ...customSelectStyles,
+                    control: () => ({
+                      ...customSelectStyles.control(),
+                      borderBottom: "none"
+                    })
+                  }}
                   isClearable
                   placeholder={<span>Year: <i>All</i></span>}
                   onChange={option => this.setState({ workingPastFilter: (option && option.value) || undefined })}

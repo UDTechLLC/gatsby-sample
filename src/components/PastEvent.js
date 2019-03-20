@@ -9,6 +9,10 @@ const Wrapper = withTheme(styled.div`
   border-top: 1px solid ${props => props.theme.text};
   grid-template-columns: 1fr .5fr 1fr 1fr .5fr;
   column-gap: 5px;
+  
+  @media screen and (max-width: 550px) {
+    grid-template-columns: 1fr;
+  }
 `)
 
 const Text = withTheme(styled.div`
