@@ -68,7 +68,7 @@ const EventListContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: 50px;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 0;
   
   @media screen and (max-width: 700px) {
     grid-template-columns: 1fr;
@@ -145,8 +145,8 @@ export default class Events extends Component {
     ) || []
 
     this.setState({
-      past,
-      current,
+      past: _.orderBy(past, o => moment(o.endDate)),
+      current: _.orderBy(current, o => moment(o.endDate)),
       pastFilters,
       currentFilters
     });
