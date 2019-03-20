@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import moment from "moment"
 
-import { Link } from "./common"
+import { Link, Ribbon } from "./common"
 
 const Container = styled(props => <Link {...props} inner={false} />)`
   text-decoration: none;
@@ -62,7 +62,17 @@ const EventPlace = styled.p`
   color: #48484b;
 `
 
-const CurrentEvent = ({ link, name, image, startDate, endDate, city, country }) => (
+const RibbonWrapper = styled.div`
+  position: absolute;
+  display: inline-block;
+  margin: 5em;
+  text-align: center;
+  left: -68px;
+  top: -60px;
+  z-index: 5;
+`
+
+const CurrentEvent = ({ type, link, name, image, startDate, endDate, city, country }) => (
   <Container href={link} target="_blank">
     <EventImg style={{ backgroundImage: `url(${image}`}} />
 
@@ -76,18 +86,28 @@ const CurrentEvent = ({ link, name, image, startDate, endDate, city, country }) 
 
         <br />
 
-        {`${moment(startDate).format("DD")} - ${moment(endDate).format("DD")}`}
+        {
+          moment(startDate).format("DD") === moment(endDate).format("DD")
+            ? moment(startDate).format("DD")
+            : `${moment(startDate).format("DD")} - ${moment(endDate).format("DD")}`
+        }
       </EventDateBubble>
 
       <div>
         { name && <EventTitle>{ name }</EventTitle> }
 
         <EventPlace>
-          { city && `${city}, `}
-
-          { country }
+          {
+            city && country
+              ? `${city}, ${country}`
+              : 'Online'
+          }
         </EventPlace>
       </div>
+
+      <RibbonWrapper>
+        <Ribbon text={type} />
+      </RibbonWrapper>
     </EventDetailsWrapper>
   </Container>
 )

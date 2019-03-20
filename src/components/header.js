@@ -1,8 +1,9 @@
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
 import CypressLogo from "../images/cypress-logo.svg"
+import { Link, Button } from "./common"
 
 const HeaderWrapper = styled.header`
   font-family: Roboto,font-sans;
@@ -10,25 +11,28 @@ const HeaderWrapper = styled.header`
   line-height: 1.42857143;
   color: #333;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
-const Logo = styled(CypressLogo)`
-  max-width: 120px;
-  cursor: pointer;
+const LogoWrapper = styled(Link)`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
 `
 
-const Header = () => (
+const Logo = styled(CypressLogo)`
+  width: 120px;
+`
+const Header = ({ onThemeChange }) => (
   <HeaderWrapper>
-    <h1 style={{ margin: 0 }}>
-      <Link
-        to="/"
-        style={{
-          color: `#333`,
-          textDecoration: `none`,
-        }}
-      >
-        <Logo />
-      </Link>
-    </h1>
+    <LogoWrapper to="/">
+      <Logo />
+    </LogoWrapper>
+
+    <Button onClick={onThemeChange}>
+      Change theme
+    </Button>
   </HeaderWrapper>
 )
 

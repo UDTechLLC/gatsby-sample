@@ -10,6 +10,10 @@ const Container = styled(BackgroundImage)`
   background-color: #17202c;
   text-align: center;
   padding: 55px 0;
+  
+  @media screen and (max-width: 550px) {
+    padding: 30px 0;
+  }
 `
 
 const TagLine = styled.h1`
@@ -19,6 +23,11 @@ const TagLine = styled.h1`
   font-weight: 600;
   margin: 40px 0 15px;
   font-family: Roboto, font-sans;
+  
+  @media screen and (max-width: 550px) {
+    font-size: 3em;
+    line-height: 50px;
+  }
 `
 
 const ByLine = styled.h2`
@@ -29,6 +38,10 @@ const ByLine = styled.h2`
   margin: 0 0 15px;
   position: relative;
   font-family: Roboto, font-sans;
+  
+  @media screen and (max-width: 550px) {
+    font-size: 1.3em;
+  }
 `
 
 const IntroHeader = ({ title, subtitle }) => (

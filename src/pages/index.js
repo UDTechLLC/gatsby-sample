@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql, StaticQuery } from "gatsby"
-import _ from "lodash"
 
 import Layout from "../components/Layout"
 import SEO from "../components/seo"
@@ -10,7 +9,7 @@ import { Link } from "../components/common"
 
 const eventsQuery = graphql`
   {
-    allContentfulEvent {
+    allContentfulEvent(filter: {node_locale: {eq: "en-US"}}) {
       edges {
         node {
           name
@@ -53,7 +52,7 @@ const IndexPage = () => (
           events={
             (events && events.allContentfulEvent)
             && events.allContentfulEvent.edges
-            && _.uniqBy(events.allContentfulEvent.edges, o => o.name)
+            // && _.uniqBy(events.allContentfulEvent.edges, o => o.name)
           }
         />
       )}
