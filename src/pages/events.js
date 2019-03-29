@@ -9,7 +9,7 @@ import { Link } from '../components/common'
 
 const eventsQuery = graphql`
   query EventsPageQuery {
-    allContentfulEvent(filter: { node_locale: { eq: "en-US" } }) {
+    events: allContentfulEvent(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
           name
@@ -54,14 +54,8 @@ const EventsPage = () => (
 
     <StaticQuery // pass events to event component
       query={eventsQuery}
-      render={events => (
-        <Events
-          events={
-            events &&
-            events.allContentfulEvent &&
-            events.allContentfulEvent.edges
-          }
-        />
+      render={data => (
+        <Events events={data && data.events && data.events.edges} />
       )}
     />
 

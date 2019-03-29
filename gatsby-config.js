@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === `development`) {
 module.exports = {
   siteMetadata: {
     title: `Cypress Gatsby Example`,
+    siteUrl: `https://cypress.io`,
     description: ``,
     author: ``,
   },
