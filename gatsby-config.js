@@ -1,5 +1,6 @@
 if (process.env.NODE_ENV === `development`) {
-  require("dotenv").config();
+  // eslint-disable-next-line global-require
+  require('dotenv').config() // if in development environment - read .env file
 }
 
 module.exports = {
@@ -34,7 +35,8 @@ module.exports = {
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
-    { // contentful connection
+    {
+      // Contentful connection
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
@@ -44,11 +46,6 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`,
-      }
-    }
+    //
   ],
 }

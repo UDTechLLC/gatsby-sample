@@ -1,60 +1,12 @@
-import React from "react"
-import { graphql, StaticQuery } from "gatsby"
+import React from 'react'
 
-import Layout from "../components/Layout"
-import SEO from "../components/seo"
-import IntroHeader from "../components/IntroHeader"
-import Events from "../components/Events"
-import { Link } from "../components/common"
-
-const eventsQuery = graphql`
-  {
-    allContentfulEvent(filter: {node_locale: {eq: "en-US"}}) {
-      edges {
-        node {
-          name
-          link
-          image {
-            file {
-              url
-            }
-          }
-          title
-          type
-          country,
-          city,
-          startDate,
-          endDate
-        }
-      }
-    }
-  }
-`
+import Layout from '../components/Layout'
+import { Link } from '../components/common'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Events page" />
-    <IntroHeader
-      title="Catch the Cypress team at these events"
-      subtitle={
-        <div>
-          {'To stay in the loop, subscribe to our newsletter or follow '}
-          <Link inner={false} href='https://twitter.com/Cypress_io' target='blank'>@Cypress_io</Link>
-          {' Twitter!'}
-        </div>
-      }
-    />
-
-    <StaticQuery // pass events to event component
-      query={eventsQuery}
-      render={events => (
-        <Events
-          events={(events && events.allContentfulEvent) && events.allContentfulEvent.edges}
-        />
-      )}
-    />
-
-    {/* <Link to="/page-2/">Go to page 2</Link> */}
+    hi
+    <Link to="/events">Events</Link>
   </Layout>
 )
 

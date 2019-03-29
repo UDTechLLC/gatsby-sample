@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import styled, { withTheme } from "styled-components"
-import moment from "moment"
-import _ from "lodash"
-import Select from "react-select"
-import { v4 } from "uuid"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled, { withTheme } from 'styled-components'
+import moment from 'moment'
+import _ from 'lodash'
+import Select from 'react-select'
+import { v4 } from 'uuid'
 
 import CurrentEvent from './CurrentEvent'
 import PastEvent from './PastEvent'
@@ -13,7 +13,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   padding: 2em 14% 2em 15%;
-  
+
   @media screen and (max-width: 1213px) {
     padding: 2em 5%;
   }
@@ -23,10 +23,10 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
+
   @media screen and (max-width: 550px) {
     flex-direction: column;
-    zIndex: 10
+    z-index: 10;
   }
 `
 
@@ -37,7 +37,7 @@ const Title = withTheme(styled.h3`
   line-height: 1.7em;
   color: ${props => props.theme.text};
   font-family: ${props => props.theme.fontSans};
-  
+
   @media screen and (max-width: 550px) {
     margin-bottom: 20px;
   }
@@ -45,19 +45,19 @@ const Title = withTheme(styled.h3`
 
 const customSelectStyles = {
   option: () => ({
-    padding: "10px",
-    border: "none",
+    padding: '10px',
+    border: 'none',
   }),
   control: () => ({
-    border: "none",
-    borderBottom: "1px solid #cecece",
-    width: "200px",
-    display: "flex",
-    flexDirection: "row"
+    border: 'none',
+    borderBottom: '1px solid #cecece',
+    width: '200px',
+    display: 'flex',
+    flexDirection: 'row',
   }),
   indicatorSeparator: () => ({
-    display: "none"
-  })
+    display: 'none',
+  }),
 }
 
 const EventListContainer = styled.div`
@@ -69,7 +69,7 @@ const EventListContainer = styled.div`
   column-gap: 50px;
   box-sizing: border-box;
   z-index: 0;
-  
+
   @media screen and (max-width: 700px) {
     grid-template-columns: 1fr;
   }
@@ -86,11 +86,11 @@ const PastEventButton = withTheme(styled.button`
   color: ${props => props.theme.text};
   font-family: ${props => props.theme.fontSans};
   cursor: pointer;
-  
+
   &:hover {
     color: ${props => props.theme.brandSuccess};
   }
-  
+
   @media screen and (max-width: 550px) {
     flex-direction: column;
     margin-bottom: 20px;
@@ -105,51 +105,60 @@ export default class Events extends Component {
     past: [],
     pastFilters: [],
     showPast: false,
-    workingPastFilter: undefined
+    workingPastFilter: undefined,
   }
 
   componentDidMount() {
     const { events } = this.props
 
-    const transformEvents = events && events.map(e => ({
-      ...e.node,
-      startDate: moment(e.node.startDate, "YYYY-MM-DD"),
-      endDate: moment(e.node.endDate, "YYYY-MM-DD"),
-      image: e.node.image && `https:${e.node.image.file.url}`
-    }))
+    const transformEvents =
+      events &&
+      events.map(e => ({
+        ...e.node,
+        startDate: moment(e.node.startDate, 'YYYY-MM-DD'),
+        endDate: moment(e.node.endDate, 'YYYY-MM-DD'),
+        image: e.node.image && `https:${e.node.image.file.url}`,
+      }))
 
-    let past = [];
-    let current = [];
+    const past = []
+    const current = []
 
     if (transformEvents && transformEvents.length) {
       transformEvents.forEach(o => {
-        if (moment(o.endDate).isBefore(moment(), "day")) {
+        if (moment(o.endDate).isBefore(moment(), 'day')) {
           past.push(o)
         } else {
           current.push(o)
         }
-      });
+      })
     }
 
-    const currentFilters = current.length && _.uniq(current.map(o => ({
-      value: o.type,
-      label: o.type
-    })))
-    const pastFilters = (
-        past.length
-        && _.uniq(past.map(o => {
-        const year = moment(o.endDate).format("YYYY");
+    const currentFilters =
+      current.length &&
+      _.uniqBy(
+        current.map(o => ({
+          value: o.type,
+          label: o.type,
+        })),
+        'value'
+      )
+    const pastFilters =
+      (past.length &&
+        _.uniqBy(
+          past.map(o => {
+            const year = moment(o.endDate).format('YYYY')
 
-        return { value: year, label: year }
-      }))
-    ) || []
+            return { value: year, label: year }
+          })
+        )) ||
+      []
 
     this.setState({
       past: _.orderBy(past, o => moment(o.endDate)),
       current: _.orderBy(current, o => moment(o.endDate)),
       pastFilters,
-      currentFilters
-    });
+      currentFilters,
+    })
   }
 
   renderCurrentEvents = ({ current, workingCurrentFilter }) => {
@@ -166,8 +175,8 @@ export default class Events extends Component {
     }
 
     return current
-        .filter(o => o.type === workingCurrentFilter)
-        .map(o => <CurrentEvent key={v4()} {...o} />)
+      .filter(o => o.type === workingCurrentFilter)
+      .map(o => <CurrentEvent key={v4()} {...o} />)
   }
 
   renderPastEvents = ({ past, workingPastFilter }) => {
@@ -184,77 +193,83 @@ export default class Events extends Component {
     }
 
     return past
-      .filter(o => moment(o.endDate).format("YYYY") === workingPastFilter)
+      .filter(o => moment(o.endDate).format('YYYY') === workingPastFilter)
       .map(o => <PastEvent key={v4()} {...o} />)
   }
 
   render() {
-    const { current, currentFilters, past, showPast, pastFilters } = this.state;
+    const { current, currentFilters, past, showPast, pastFilters } = this.state
 
     return (
       <Container>
         <Row>
-          <Title>
-            Upcoming events ({ (current && current.length) || 0 })
-          </Title>
+          <Title>Upcoming events ({(current && current.length) || 0})</Title>
 
-          {
-            currentFilters.length
-            && (
-              <Select
-                options={currentFilters}
-                styles={customSelectStyles}
-                isClearable
-                placeholder={<span>Event type: <i>All</i></span>}
-                onChange={option => this.setState({workingCurrentFilter: (option && option.value) || undefined})}
-              />
-            )
-          }
+          {currentFilters.length && (
+            <Select
+              options={currentFilters}
+              styles={customSelectStyles}
+              isClearable
+              placeholder={
+                <span>
+                  Event type: <i>All</i>
+                </span>
+              }
+              onChange={option =>
+                this.setState({
+                  workingCurrentFilter: (option && option.value) || undefined,
+                })
+              }
+            />
+          )}
         </Row>
 
         <EventListContainer>
-          { this.renderCurrentEvents(this.state) }
+          {this.renderCurrentEvents(this.state)}
         </EventListContainer>
 
         <Row>
           <PastEventButton
             onClick={() => this.setState({ showPast: !showPast })}
           >
-            Past Events ({ (past && past.length) || 0 })
-
-            { !showPast ? ` +` : ` −`}
+            Past Events ({(past && past.length) || 0}){!showPast ? ` +` : ` −`}
           </PastEventButton>
 
-          {
-            showPast && pastFilters.length
-              && (
-                <Select
-                  options={pastFilters}
-                  styles={{
-                    ...customSelectStyles,
-                    control: () => ({
-                      ...customSelectStyles.control(),
-                      borderBottom: "none"
-                    })
-                  }}
-                  isClearable
-                  placeholder={<span>Year: <i>All</i></span>}
-                  onChange={option => this.setState({ workingPastFilter: (option && option.value) || undefined })}
-                />
-              )
-          }
+          {showPast && pastFilters.length && (
+            <Select
+              options={pastFilters}
+              styles={{
+                ...customSelectStyles,
+                control: () => ({
+                  ...customSelectStyles.control(),
+                  borderBottom: 'none',
+                }),
+              }}
+              isClearable
+              placeholder={
+                <span>
+                  Year: <i>All</i>
+                </span>
+              }
+              onChange={option =>
+                this.setState({
+                  workingPastFilter: (option && option.value) || undefined,
+                })
+              }
+            />
+          )}
         </Row>
 
-        { showPast && <div>{ this.renderPastEvents(this.state) }</div> }
+        {showPast && <div>{this.renderPastEvents(this.state)}</div>}
       </Container>
     )
   }
 }
 
 Events.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.shape())
+  events: PropTypes.arrayOf(PropTypes.shape()),
 }
 
 Events.defaultProps = {
-  events: []
+  events: [],
 }

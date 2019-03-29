@@ -1,17 +1,16 @@
-import React, { Component } from "react"
-import { StaticQuery, graphql } from "gatsby"
-import styled, { ThemeProvider } from "styled-components"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { StaticQuery, graphql } from 'gatsby'
+import styled, { ThemeProvider } from 'styled-components'
 
-import { themes } from "./common"
-import Header from "./header"
-import "./layout.css"
+import { themes, GlobalStyle } from './styles'
+import Header from './Header'
 
 const MainWrapper = styled.div`
-  background-color: ${props => props.theme.backgroundColor}
+  background-color: ${props => props.theme.backgroundColor};
 `
 
 const MainContainer = styled.div`
-  font-family: Roboto,font-sans;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -20,30 +19,32 @@ const MainContainer = styled.div`
   min-height: 93vh;
   justify-content: space-between;
 `
+
 const Footer = styled.footer`
   display: flex;
   justify-content: center;
-  padding: 30px
+  padding: 30px;
 `
 
 export default class Layout extends Component {
   state = {
-    theme: themes && themes.light
+    theme: themes && themes.light, // default theme is light
   }
 
   handleChangeTheme = () => {
-    const { theme } = this.state;
+    const { theme } = this.state
 
+    // by default handleChangeTheme is handle toggling between light and dark themes
     if (theme && theme.name === 'light') {
-      return this.setState({ theme: themes.dark });
+      return this.setState({ theme: themes.dark })
     }
 
-    return this.setState({ theme: themes.light });
+    return this.setState({ theme: themes.light })
   }
 
   render() {
-    const { children } = this.props;
-    const { theme } = this.state;
+    const { children } = this.props
+    const { theme } = this.state
 
     return (
       <StaticQuery
@@ -60,16 +61,23 @@ export default class Layout extends Component {
           <>
             <ThemeProvider theme={theme}>
               <MainWrapper>
-                <Header siteTitle={data.site.siteMetadata.title} onThemeChange={this.handleChangeTheme} />
+                <GlobalStyle theme={theme} />
+
+                <Header
+                  siteTitle={data.site.siteMetadata.title}
+                  onThemeChange={this.handleChangeTheme}
+                />
+
                 <MainContainer>
-                  <main>{ children }</main>
+                  <main>{children}</main>
+
                   <Footer
                     style={{
                       backgroundColor: theme.altBg,
-                      color: theme.ltText
+                      color: theme.ltText,
                     }}
                   >
-                    © {new Date().getFullYear()} Cypess.io
+                    © {new Date().getFullYear()} Cypress.io
                   </Footer>
                 </MainContainer>
               </MainWrapper>
@@ -79,4 +87,8 @@ export default class Layout extends Component {
       />
     )
   }
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 }

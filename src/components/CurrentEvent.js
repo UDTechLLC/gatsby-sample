@@ -1,22 +1,22 @@
-import React from "react"
-import styled, { withTheme } from "styled-components"
-import moment from "moment"
+import React from 'react'
+import styled, { withTheme } from 'styled-components'
+import moment from 'moment'
 
-import { Link, Ribbon } from "./common"
+import { Link, Ribbon } from './common'
 
 const Container = styled(props => <Link {...props} inner={false} />)`
   text-decoration: none;
   background: #f5f6f7;
   border-radius: 7px;
-  box-shadow: 0 2px 2px 2px rgba(0,0,0,.05);
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.05);
   margin-bottom: 50px;
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
-  
+
   &:hover {
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.3)
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   }
 `
 const EventImg = styled.div`
@@ -53,11 +53,9 @@ const EventTitle = styled.h2`
   font-size: 1.2em;
   margin: 0 0 3px;
   color: #48484b;
-  font-family: Roboto, font-sans;
 `
 
 const EventPlace = styled.p`
-  font-family: Roboto, font-sans;
   margin: 0 0 10px;
   color: #48484b;
 `
@@ -72,59 +70,57 @@ const RibbonWrapper = styled.div`
   z-index: 5;
 `
 
-const CurrentEvent = withTheme(({ theme, type, link, name, image, startDate, endDate, city, country }) => {
-  const ribbonColor = type => {
-    switch (type.toLowerCase()) {
-      case "podcast":
-        return theme.highlightPurple;
-      case "meetup":
-        return theme.highlightOrange;
-      case "workshop":
-          return theme.highlightRed;
-      default:
-        return undefined;
+const CurrentEvent = withTheme(
+  ({ theme, type, link, name, image, startDate, endDate, city, country }) => {
+    const ribbonColor = () => {
+      switch (type.toLowerCase()) {
+        case 'podcast':
+          return theme.highlightPurple
+        case 'meetup':
+          return theme.highlightOrange
+        case 'workshop':
+          return theme.highlightRed
+        default:
+          return undefined
+      }
     }
+
+    return (
+      <Container href={link} target="_blank">
+        <EventImg style={{ backgroundImage: `url(${image}` }} />
+
+        <EventDetailsWrapper>
+          <EventDateBubble>
+            {moment(startDate).format('MMMM') === moment(endDate).format('MMMM')
+              ? moment(startDate).format('MMMM')
+              : `${moment(startDate).format('MMM')} - ${moment(endDate).format(
+                  'MMM'
+                )}`}
+
+            <br />
+
+            {moment(startDate).format('DD') === moment(endDate).format('DD')
+              ? moment(startDate).format('DD')
+              : `${moment(startDate).format('DD')} - ${moment(endDate).format(
+                  'DD'
+                )}`}
+          </EventDateBubble>
+
+          <div>
+            {name && <EventTitle>{name}</EventTitle>}
+
+            <EventPlace>
+              {city && country ? `${city}, ${country}` : 'Online'}
+            </EventPlace>
+          </div>
+
+          <RibbonWrapper>
+            <Ribbon text={type} color={ribbonColor(type)} />
+          </RibbonWrapper>
+        </EventDetailsWrapper>
+      </Container>
+    )
   }
+)
 
-  return (
-    <Container href={link} target="_blank">
-      <EventImg style={{ backgroundImage: `url(${image}`}} />
-
-      <EventDetailsWrapper>
-        <EventDateBubble>
-          {
-            moment(startDate).format("MMMM") === moment(endDate).format("MMMM")
-              ? moment(startDate).format("MMMM")
-              : `${moment(startDate).format("MMM")} - ${moment(endDate).format("MMM")}`
-          }
-
-          <br />
-
-          {
-            moment(startDate).format("DD") === moment(endDate).format("DD")
-              ? moment(startDate).format("DD")
-              : `${moment(startDate).format("DD")} - ${moment(endDate).format("DD")}`
-          }
-        </EventDateBubble>
-
-        <div>
-          { name && <EventTitle>{ name }</EventTitle> }
-
-          <EventPlace>
-            {
-              city && country
-                ? `${city}, ${country}`
-                : 'Online'
-            }
-          </EventPlace>
-        </div>
-
-        <RibbonWrapper>
-          <Ribbon text={type} color={ribbonColor(type)} />
-        </RibbonWrapper>
-      </EventDetailsWrapper>
-    </Container>
-  )
-})
-
-export default CurrentEvent;
+export default CurrentEvent
