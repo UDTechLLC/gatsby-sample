@@ -5,6 +5,8 @@ import styled, { ThemeProvider } from 'styled-components'
 
 import { themes, GlobalStyle } from './styles'
 import Header from './Header'
+import Hero from './Hero'
+import SEO from './SEO'
 
 const MainWrapper = styled.div`
   background-color: ${props => props.theme.backgroundColor};
@@ -43,7 +45,7 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, hero } = this.props
     const { theme } = this.state
 
     return (
@@ -61,6 +63,7 @@ export default class Layout extends Component {
           <>
             <ThemeProvider theme={theme}>
               <MainWrapper>
+                <SEO />
                 <GlobalStyle theme={theme} />
 
                 <Header
@@ -69,6 +72,8 @@ export default class Layout extends Component {
                 />
 
                 <MainContainer>
+                  {hero && <Hero {...hero} />}
+
                   <main>{children}</main>
 
                   <Footer
@@ -91,4 +96,9 @@ export default class Layout extends Component {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  hero: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]),
+}
+
+Layout.defaultProps = {
+  hero: undefined,
 }

@@ -43,7 +43,7 @@ const ByLine = styled.h2`
   }
 `
 
-const IntroHeader = ({ title, subtitle }) => (
+const Hero = ({ prologue, tagLine, byLine, epilogue }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -61,23 +61,22 @@ const IntroHeader = ({ title, subtitle }) => (
       const imageData = data.desktop.childImageSharp.fluid
 
       return (
-        <Container Tag="section" fluid={imageData} backgroundColor="#17202c">
-          {title && <TagLine>{title}</TagLine>}
-          {subtitle && <ByLine>{subtitle}</ByLine>}
+        <Container Tag="section" fluid={imageData}>
+          {prologue}
+          {tagLine && <TagLine>{tagLine}</TagLine>}
+          {byLine && <ByLine>{byLine}</ByLine>}
+          {epilogue}
         </Container>
       )
     }}
   />
 )
 
-IntroHeader.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
+Hero.propTypes = {
+  prologue: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  tagLine: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  byLine: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  epilogue: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 }
 
-IntroHeader.defaultProps = {
-  title: undefined,
-  subtitle: undefined,
-}
-
-export default IntroHeader
+export default Hero

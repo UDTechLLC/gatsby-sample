@@ -5,9 +5,12 @@ if (process.env.NODE_ENV === `development`) {
 
 module.exports = {
   siteMetadata: {
-    title: `Cypress Gatsby Example`,
-    siteUrl: `https://cypress.io`,
-    description: ``,
+    title: `JavaScript End to End Testing Framework | Cypress.io`,
+    siteUrl:
+      process.env.NODE_ENV === `development`
+        ? `http://localhost`
+        : `https://cypress.io`,
+    description: `Fast, easy and reliable testing for anything that runs in a browser. Install Cypress in seconds and take the pain out of front-end testing.`,
     author: ``,
   },
   plugins: [
@@ -46,7 +49,6 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // 'gatsby-plugin-offline',
-    //
+    'gatsby-plugin-offline',
   ],
 }

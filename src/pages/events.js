@@ -2,8 +2,7 @@ import React from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 
 import Layout from '../components/Layout'
-import Seo from '../components/Seo'
-import IntroHeader from '../components/IntroHeader'
+import SEO from '../components/SEO'
 import Events from '../components/Events'
 import { Link } from '../components/common'
 
@@ -32,12 +31,10 @@ const eventsQuery = graphql`
 `
 
 const EventsPage = () => (
-  <Layout>
-    <Seo title="Events page" />
-
-    <IntroHeader
-      title="Catch the Cypress team at these events"
-      subtitle={
+  <Layout
+    hero={{
+      tagLine: 'Catch the Cypress team at these events',
+      byLine: (
         <div>
           {'To stay in the loop, subscribe to our newsletter or follow '}
           <Link
@@ -49,8 +46,10 @@ const EventsPage = () => (
           </Link>
           {' Twitter!'}
         </div>
-      }
-    />
+      ),
+    }}
+  >
+    <SEO title="Catch the Cypress team at these events" />
 
     <StaticQuery // pass events to event component
       query={eventsQuery}
@@ -58,8 +57,6 @@ const EventsPage = () => (
         <Events events={data && data.events && data.events.edges} />
       )}
     />
-
-    {/* <Link to="/page-2/">Go to page 2</Link> */}
   </Layout>
 )
 
