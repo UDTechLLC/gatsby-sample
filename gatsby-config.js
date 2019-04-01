@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === `development`) {
 
 module.exports = {
   siteMetadata: {
-    title: `JavaScript End to End Testing Framework | Cypress.io`,
+    title: `Cypress.io`,
     siteUrl:
       process.env.NODE_ENV === `development`
         ? `http://localhost`

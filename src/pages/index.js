@@ -2,6 +2,7 @@ import React from 'react'
 
 import Layout from '../components/Layout'
 import { Link } from '../components/common'
+import SEO from '../components/SEO'
 
 const IndexPage = () => (
   <Layout
@@ -22,6 +23,8 @@ const IndexPage = () => (
       ),
     }}
   >
+    <SEO title="JavaScript End to End Testing Framework" />
+
     <ul>
       <li>
         <Link to="/events">Events</Link>

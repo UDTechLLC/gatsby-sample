@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const Button = styled.button`
   padding: 0 15px;
@@ -11,4 +11,4 @@ export const Button = styled.button`
 
   /* Color the border and text with theme.main */
   background-color: ${props => props.theme.brandSuccess};
-`;
+`

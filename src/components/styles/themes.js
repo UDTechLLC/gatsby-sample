@@ -3,6 +3,7 @@ export const themes = {
     name: 'light',
     // colors
     black: '#000',
+    gray: 'rgb(64, 64, 64)',
 
     backgroundColor: '#fff',
     backgroundColor90: 'rgba(255,255,255,0.9)',
@@ -62,6 +63,7 @@ export const themes = {
     name: 'dark',
     // colors
     black: '#000',
+    gray: 'rgb(64, 64, 64)',
 
     backgroundColor: '#162332',
     backgroundColor90: 'rgba(0,0,0,0.9)',

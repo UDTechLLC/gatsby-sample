@@ -7,6 +7,7 @@ import { themes, GlobalStyle } from './styles'
 import Header from './Header'
 import Hero from './Hero'
 import SEO from './SEO'
+import GDPRPannel from './GDPRPanel'
 
 const MainWrapper = styled.div`
   background-color: ${props => props.theme.backgroundColor};
@@ -63,7 +64,9 @@ export default class Layout extends Component {
           <>
             <ThemeProvider theme={theme}>
               <MainWrapper>
+                {/* SEO headers */}
                 <SEO />
+                {/* styled-components global styles */}
                 <GlobalStyle theme={theme} />
 
                 <Header
@@ -85,6 +88,9 @@ export default class Layout extends Component {
                     © {new Date().getFullYear()} Cypress.io
                   </Footer>
                 </MainContainer>
+
+                {/* Makes site GDPR compliant */}
+                <GDPRPannel />
               </MainWrapper>
             </ThemeProvider>
           </>
