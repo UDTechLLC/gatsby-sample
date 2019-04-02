@@ -2,9 +2,16 @@ export const themes = {
   light: {
     name: 'light',
     // colors
+    white: '#fff',
+    milky: '#efefef',
     black: '#000',
-    gray: 'rgb(64, 64, 64)',
+    gray: '#686b74',
+    darkGray: '#282b34',
+    green: '#00BF88',
+    darkGreen: '#00a676',
+    deepBlue: '#162332',
 
+    // old styles
     backgroundColor: '#fff',
     backgroundColor90: 'rgba(255,255,255,0.9)',
     backgroundColor80: 'rgba(255,255,255,0.8)',

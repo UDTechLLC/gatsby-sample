@@ -2,46 +2,32 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   html, body {
-  height: 100%;
-}
-
-body {
-  background-color: #fff;
-  font-family: ${props => props.theme.fontTitle};
-  display: flex;
-  flex-direction: column;
-  height: 100vh; /* Avoid the IE 10-11 \`min-height\` bug. */
-  margin: 0;
-}
-
-header {
-  text-align: center;
-  position: relative;
-
-  &:after {
-    content: "";
-    width: 30%;
-    height: 1px;
-    border-bottom: 2px solid #cfd4d9;
-    bottom: -2em;
-    left: 35%;
-    position: absolute;
+    height: 100%;
+  }
+  
+  html {
+    font-size: 62.5%;
   }
 
-  p {
-    color: #7d7d7d;
-    font-size: 1.3em;
+  body {
+    //background-color: #fff;
+    font-size: 1.4rem;
+    font-family: ${props => props.theme.fontTitle};
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Avoid the IE 10-11 \`min-height\` bug. */
+    margin: 0;
   }
 
-  &.intro-header:after {
-    display: none;
+  header {
+    text-align: center;
+    position: relative;
   }
-}
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: ${props => props.theme.fontTitle};
-  color: #444;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${props => props.theme.fontTitle};
+    color: #444;
+  }
 
 h2 {
   color: #48484b;
@@ -84,13 +70,13 @@ em.blue {
 }
 
 
-#index, .features-header, #dashboard, .pricing-header, .support-header {
-  position: relative;
-  //background-image: url('/img/cypress-header-bg.png');
-  background-position: center 200px;
-  background-repeat: no-repeat;
-  background-color: #172432;
-}
+//#index, .features-header, #dashboard, .pricing-header, .support-header {
+//  position: relative;
+//  //background-image: url('/img/cypress-header-bg.png');
+//  background-position: center 200px;
+//  background-repeat: no-repeat;
+//  background-color: #172432;
+//}
 
 // Minimize page flickering for google optimize
 // https://support.google.com/360suite/optimize/answer/6262084?authuser=1#step-2
@@ -415,4 +401,19 @@ h5 {
   }
 }
 
+.btn {
+  padding: 0 15px;
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 3rem;
+  font-weight: 700;
+  background-color: ${props => props.theme.green};
+
+  &:hover {
+    background-color: ${props => props.theme.darkGreen};
+  }
+}
 `

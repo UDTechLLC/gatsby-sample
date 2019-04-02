@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import styled, { ThemeProvider } from 'styled-components'
 
+import SEO from './SEO'
 import { themes, GlobalStyle } from './styles'
+import GDPRPanel from './GDPRPanel'
 import Header from './Header'
 import Hero from './Hero'
-import SEO from './SEO'
-import GDPRPannel from './GDPRPanel'
+import Footer from './Footer'
 
 const MainWrapper = styled.div`
   background-color: ${props => props.theme.backgroundColor};
@@ -23,27 +24,21 @@ const MainContainer = styled.div`
   justify-content: space-between;
 `
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-`
-
 export default class Layout extends Component {
   state = {
     theme: themes && themes.light, // default theme is light
   }
-
-  handleChangeTheme = () => {
-    const { theme } = this.state
-
-    // by default handleChangeTheme is handle toggling between light and dark themes
-    if (theme && theme.name === 'light') {
-      return this.setState({ theme: themes.dark })
-    }
-
-    return this.setState({ theme: themes.light })
-  }
+  // TODO style themes: style variables are in ./styles/themes.js
+  // handleChangeTheme = () => {
+  //   const { theme } = this.state
+  //
+  //   // by default handleChangeTheme is handle toggling between light and dark themes
+  //   if (theme && theme.name === 'light') {
+  //     return this.setState({ theme: themes.dark })
+  //   }
+  //
+  //   return this.setState({ theme: themes.light })
+  // }
 
   render() {
     const { children, hero } = this.props
@@ -68,29 +63,19 @@ export default class Layout extends Component {
                 <SEO />
                 {/* styled-components global styles */}
                 <GlobalStyle theme={theme} />
-
-                <Header
-                  siteTitle={data.site.siteMetadata.title}
-                  onThemeChange={this.handleChangeTheme}
-                />
-
-                <MainContainer>
-                  {hero && <Hero {...hero} />}
-
-                  <main>{children}</main>
-
-                  <Footer
-                    style={{
-                      backgroundColor: theme.altBg,
-                      color: theme.ltText,
-                    }}
-                  >
-                    © {new Date().getFullYear()} Cypress.io
-                  </Footer>
-                </MainContainer>
-
                 {/* Makes site GDPR compliant */}
-                <GDPRPannel />
+                <GDPRPanel />
+                <Header />
+                <MainContainer>
+                  {/*
+                    if hero prop of layout isn't empty
+                    will show hero section
+                  */}
+                  {hero && <Hero {...hero} />}
+                  {/* page content */}
+                  <main>{children}</main>
+                  <Footer />
+                </MainContainer>
               </MainWrapper>
             </ThemeProvider>
           </>
@@ -106,5 +91,5 @@ Layout.propTypes = {
 }
 
 Layout.defaultProps = {
-  hero: undefined,
+  hero: null,
 }

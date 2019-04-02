@@ -30,6 +30,7 @@
     "react-dom": "^16.8.4",
     "react-emotion": "^9",
     "react-helmet": "^5.2.0",
+    "react-icons": "^3.5.0",
     "react-select": "^2.4.2",
     "react-typography": "^0.16.19",
     "styled-components": "^4.1.3",

@@ -9,15 +9,13 @@ const GDPRPanel = withTheme(({ theme }) => (
     location="bottom"
     buttonText="Got it!"
     // cookieName="myAwesomeCookieName2"
-    style={{ background: '#efefef', color: '#404040' }}
-    buttonStyle={{
-      background: '#00BF88',
-      color: '#fff',
-      margin: 0,
-      alignSelf: 'stretch',
-      fontSize: '14px',
-      fontWeight: 600,
+    style={{
+      background: theme.milky,
+      color: theme.darkGray,
     }}
+    disableButtonStyles
+    buttonClasses={['btn']}
+    buttonStyle={{ alignSelf: 'stretch' }}
     // expires={150}
   >
     This website uses cookies to ensure you get the best experience on our
@@ -25,14 +23,12 @@ const GDPRPanel = withTheme(({ theme }) => (
     <Link
       style={{
         color: theme.gray,
-        fontSize: '14px',
         textDecoration: 'underline',
       }}
       visitedStyle={{ color: theme.gray }}
       hoverStyle={{ color: theme.gray }}
       inner={false}
-      href="https://www.cypress.io/privacy-policy/#Use-of-Cookies-and-other-Data-Collection-Tools"
-      target="_blank"
+      to="https://www.cypress.io/privacy-policy/#Use-of-Cookies-and-other-Data-Collection-Tools"
     >
       Learn More
     </Link>
