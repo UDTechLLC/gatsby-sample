@@ -1,107 +1,23 @@
 import React from 'react'
-import styled from 'styled-components'
 import { graphql, StaticQuery } from 'gatsby'
 import Img from 'gatsby-image'
 import { v4 } from 'uuid'
 import { FaGithub } from 'react-icons/fa'
 
-import { Link, Button } from './common'
+import { Button } from './common'
 
+// nav items
+import { LeftNav, RightNav } from '../data/HeaderNavs'
 // styles
-const HeaderWrapper = styled.header`
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
-const LogoWrapper = styled(Link)`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-`
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex: 1;
-  padding: 0 0 0 40px;
-`
-const AltMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
-`
-const NavList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-flex;
-  flex-direction: row;
-`
-const NavItem = styled.li`
-  margin-left: 0;
-  padding: 0 20px;
-  display: inline-flex;
-  align-items: center;
-`
-const NavLink = styled(Link)`
-  color: ${props => props.theme.gray};
-  text-decoration: none;
-  transition: 0.2s;
-  display: inline-block;
-  font-weight: 700;
-  position: relative;
-
-  &:hover {
-    color: ${props => props.theme.darkGray};
-  }
-`
-// nav list items
-const LeftNav = [
-  {
-    inner: true,
-    to: '/features',
-    label: 'Features',
-  },
-  {
-    inner: true,
-    to: '/how-it-works',
-    label: 'How it works',
-  },
-  {
-    inner: true,
-    to: '/dashboard',
-    label: 'Dashboard',
-  },
-  {
-    inner: true,
-    to: '/pricing',
-    label: 'Pricing',
-  },
-]
-const RightNav = [
-  {
-    inner: true,
-    to: '/support',
-    label: 'Support',
-  },
-  {
-    inner: false,
-    to: 'https://cypress.io/blog',
-    label: 'Blog',
-  },
-  {
-    inner: true,
-    to: 'https://docs.sypress.io',
-    label: 'Docs',
-  },
-]
+import {
+  HeaderWrapper,
+  LogoWrapper,
+  MenuWrapper,
+  AltMenu,
+  NavList,
+  NavItem,
+  NavLink,
+} from './styles/header'
 
 const Header = () => {
   const renderLogo = images => (
@@ -118,12 +34,12 @@ const Header = () => {
     <AltMenu>
       <NavList>
         <NavItem>
-          <NavLink inner={false} to="https://docs.cypress.io">
+          <NavLink inner={false} to="https://dashboard.cypress.io">
             <Button>Login</Button>
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink inner={false} to="https://docs.cypress.io">
+          <NavLink inner={false} to="https://github.com/cypress-io/cypress">
             <FaGithub style={{ fontSize: '2.2rem', lineHeight: 1 }} />
           </NavLink>
         </NavItem>

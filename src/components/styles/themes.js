@@ -1,10 +1,18 @@
 export const themes = {
   light: {
     name: 'light',
+    // Typography
+    fontSans: '"Roboto", font-sans',
+    fontSerif: 'Garamond, Georgia, "Times New Roman", serif',
+    fontMono: 'Consolas, Monaco, "Andale Mono", monospace',
+    fontTitle: '"Roboto", font-sans',
+    fontSize: '1.4rem',
+    lineHeight: '1.2',
     // colors
     white: '#fff',
     milky: '#efefef',
     black: '#000',
+    lightGray: '#b2b4b6',
     gray: '#686b74',
     darkGray: '#282b34',
     green: '#00BF88',
@@ -49,14 +57,6 @@ export const themes = {
     codeBackground: '#eee',
     codeForeground: '#555',
     codeBorderRadius: '4px',
-
-    // Typography
-    fontSans: '"Roboto", font-sans',
-    fontSerif: 'Garamond, Georgia, "Times New Roman", serif',
-    fontMono: 'Consolas, Monaco, "Andale Mono", monospace',
-    fontTitle: '"Roboto", font-sans',
-    fontSize: '16px',
-    lineHeight: '1.7em',
 
     // Layout
     maxWidth: '1400px',

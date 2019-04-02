@@ -16,11 +16,11 @@ const IndexPage = () => (
       ),
       byLine:
         'Fast, easy and reliable testing for anything that runs in a browser.',
-      epilogue: (
-        <div>
-          <h1>Hello world</h1>
-        </div>
-      ),
+      // epilogue: (
+      //   <div>
+      //     <h1>Hello world</h1>
+      //   </div>
+      // ),
     }}
   >
     <SEO title="JavaScript End to End Testing Framework" />

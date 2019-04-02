@@ -11,8 +11,9 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     //background-color: #fff;
-    font-size: 1.4rem;
-    font-family: ${props => props.theme.fontTitle};
+    font-size: ${props => props.theme.fontSize};
+    line-height: ${props => props.theme.lineHeight};
+    font-family: ${props => props.theme.fontSans};
     display: flex;
     flex-direction: column;
     height: 100vh; /* Avoid the IE 10-11 \`min-height\` bug. */
@@ -22,6 +23,23 @@ export const GlobalStyle = createGlobalStyle`
   header {
     text-align: center;
     position: relative;
+  }
+  
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media screen and (min-width: 768px) {
+      width: 750px;
+    }
+    @media screen and (min-width: 992px) {
+      width: 970px;
+    }
+    @media screen and (min-width: 1200px) {
+      width: 1170px;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

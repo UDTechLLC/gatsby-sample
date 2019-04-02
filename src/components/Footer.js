@@ -1,90 +1,86 @@
 import React from 'react'
-import styled, { withTheme } from 'styled-components'
-
-import { Link } from './common'
-
+import { v4 } from 'uuid'
+import { FaGithub, FaTwitter, FaFacebook, FaEnvelope } from 'react-icons/fa'
+// nav items
+import { getStarted, support, developers, company } from '../data/FooterNavs'
 // styles
-const FooterWrapper = styled.footer`
-  background-color: ${props => props.theme.deepBlue};
-  color: ${props => props.theme.gray};
-`
-const TopWrapper = styled.div`
-  display: flex;
-`
-const BottomWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-`
-const TopHeading = styled.h5`
-  font-size: 1.5rem;
-  line-height: 1.7rem;
-  color: ${props => props.theme.white};
-  font-weight: 700;
-`
+import {
+  FooterWrapper,
+  TopWrapper,
+  BottomWrapper,
+  TopHeading,
+  NavList,
+  NavLink,
+  PrivacyLink,
+  HorizontalNavList,
+  HorizontalNavListItem,
+} from './styles/footer'
 // nav list items
-const getStarted = [
-  {
-    inner: false,
-    to: 'https://on.cypress.io/why-cypress',
-    label: 'Why Cypress',
-  },
-  {
-    inner: false,
-    to: 'https://on.cypress.io/installing-cypress',
-    label: 'Install Cypress',
-  },
-  {
-    inner: false,
-    to: 'https://on.cypress.io/writing-your-first-test',
-    label: 'Write your first test',
-  },
-  {
-    inner: false,
-    to: 'https://on.cypress.io/testing-your-app',
-    label: 'Test your app',
-  },
-]
-const Footer = withTheme(({ theme }) => {
+
+const socialMedia = {
+  github: 'https://github.com/cypress-io/cypress',
+  twitter: 'https://twitter.com/Cypress_io',
+  facebook: 'https://facebook.com/cypressio',
+  mail: 'mailto:hello@cypress.io',
+}
+
+const Footer = () => {
   const renderNavColumn = (heading, links) => (
     <div>
       <TopHeading>{heading}</TopHeading>
-      <ul>
+      <NavList>
         {links.map(({ inner, label, to }) => (
-          <li>
-            <Link inner={inner} to={to}>
+          <li key={v4()}>
+            <NavLink inner={inner} to={to}>
               {label}
-            </Link>
+            </NavLink>
           </li>
         ))}
-      </ul>
+      </NavList>
     </div>
   )
 
+  const renderConnectivityColumn = () => {
+    const icons = {
+      github: <FaGithub style={{ fontSize: '3rem' }} />,
+      twitter: <FaTwitter style={{ fontSize: '3rem' }} />,
+      facebook: <FaFacebook style={{ fontSize: '3rem' }} />,
+      mail: <FaEnvelope style={{ fontSize: '3rem' }} />,
+    }
+
+    return (
+      <div>
+        <TopHeading>Send updates to my inbox</TopHeading>
+        <HorizontalNavList>
+          {Object.keys(socialMedia).map(key => (
+            <HorizontalNavListItem key={v4()}>
+              <NavLink inner={false} to={socialMedia[key]}>
+                {icons[key]}
+              </NavLink>
+            </HorizontalNavListItem>
+          ))}
+        </HorizontalNavList>
+      </div>
+    )
+  }
+
   return (
     <FooterWrapper>
-      <TopWrapper>
-        {renderNavColumn('Get Started', getStarted)}
-        {renderNavColumn('Support', getStarted)}
-        {renderNavColumn('Developers', getStarted)}
-        {renderNavColumn('Company', getStarted)}
-      </TopWrapper>
-      <BottomWrapper>
-        © {new Date().getFullYear()} Cypress.io •
-        <Link
-          to="/privacy-policy"
-          style={{
-            color: theme.gray,
-            marginLeft: '5px',
-          }}
-          visitedStyle={{ color: theme.gray }}
-          hoverStyle={{ color: `${theme.milky} !important` }}
-        >
-          Privacy
-        </Link>
-      </BottomWrapper>
+      <div className="container">
+        <TopWrapper>
+          {renderNavColumn('Get Started', getStarted)}
+          {renderNavColumn('Support', support)}
+          {renderNavColumn('Developers', developers)}
+          {renderNavColumn('Company', company)}
+          {renderConnectivityColumn()}
+        </TopWrapper>
+        <BottomWrapper>
+          © {new Date().getFullYear()} Cypress.io •
+          <PrivacyLink to="/privacy-policy">Privacy</PrivacyLink>
+        </BottomWrapper>
+      </div>
     </FooterWrapper>
   )
-})
+}
 
 export default Footer
