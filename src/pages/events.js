@@ -8,17 +8,16 @@ import { Link } from '../components/common'
 
 const eventsQuery = graphql`
   query EventsPageQuery {
-    events: allContentfulEvent(filter: { node_locale: { eq: "en-US" } }) {
+    events: allContentfulEvent {
       edges {
         node {
           name
-          link
+          eventLink
           image {
             file {
               url
             }
           }
-          title
           type
           country
           city
