@@ -3,6 +3,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import { Link } from '../components/common'
 import SEO from '../components/SEO'
+import InstallMethod from '../components/InstallMethod'
 
 const IndexPage = () => (
   <Layout
@@ -16,11 +17,11 @@ const IndexPage = () => (
       ),
       byLine:
         'Fast, easy and reliable testing for anything that runs in a browser.',
-      // epilogue: (
-      //   <div>
-      //     <h1>Hello world</h1>
-      //   </div>
-      // ),
+      epilogue: (
+        <div>
+          <InstallMethod />
+        </div>
+      ),
     }}
   >
     <SEO title="JavaScript End to End Testing Framework" />

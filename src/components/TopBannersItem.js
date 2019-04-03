@@ -11,6 +11,10 @@ const BannerItemWrapper = styled.div`
   display: flex;
   align-self: stretch;
   justify-content: space-between;
+
+  :not(.container) {
+    border-bottom: 1px solid ${props => props.theme.orange};
+  }
 `
 const Html = styled.div`
   display: inline-flex;
@@ -73,12 +77,14 @@ class TopBannersItem extends Component {
     if (!isActual) return null
 
     return (
-      <BannerItemWrapper className="container">
-        <Html>{html2jsx(text)}</Html>
+      <BannerItemWrapper>
+        <BannerItemWrapper className="container">
+          <Html>{html2jsx(text)}</Html>
 
-        <CallToAction inner={false} to={buttonLink} className="btn">
-          {buttonText || 'Get Started'}
-        </CallToAction>
+          <CallToAction inner={false} to={buttonLink} className="btn">
+            {buttonText || 'Get Started'}
+          </CallToAction>
+        </BannerItemWrapper>
       </BannerItemWrapper>
     )
   }

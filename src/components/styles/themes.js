@@ -11,15 +11,23 @@ export const themes = {
     // colors
     white: '#fff',
     milky: '#efefef',
+
     black: '#000',
+
     lightGray: '#b2b4b6',
     gray: '#686b74',
     darkGray: '#282b34',
+
     green: '#00BF88',
     darkGreen: '#00a676',
+
     deepBlue: '#162332',
+
     orange: '#e4714c',
+
     red: '#c92c2c',
+
+    yellow: '#ff0',
 
     // old styles
     backgroundColor: '#fff',
