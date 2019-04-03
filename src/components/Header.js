@@ -5,12 +5,14 @@ import { v4 } from 'uuid'
 import { FaGithub } from 'react-icons/fa'
 
 import { Button } from './common'
+import TopBanners from './TopBanners'
 
 // nav items
 import { LeftNav, RightNav } from '../data/HeaderNavs'
 // styles
 import {
   HeaderWrapper,
+  HeaderContent,
   LogoWrapper,
   MenuWrapper,
   AltMenu,
@@ -74,12 +76,15 @@ const Header = () => {
       `}
       render={images => (
         <HeaderWrapper>
-          {renderLogo(images) /* logo */}
-          <MenuWrapper>
-            {renderNav(LeftNav) /* left navigation menu */}
-            {renderNav(RightNav) /* right navigation menu */}
-          </MenuWrapper>
-          {renderAltNavList() /* right navigation menu with alternative view */}
+          <TopBanners />
+          <HeaderContent>
+            {renderLogo(images) /* logo */}
+            <MenuWrapper>
+              {renderNav(LeftNav) /* left navigation menu */}
+              {renderNav(RightNav) /* right navigation menu */}
+            </MenuWrapper>
+            {renderAltNavList() /* right navigation menu with alternative view */}
+          </HeaderContent>
         </HeaderWrapper>
       )}
     />

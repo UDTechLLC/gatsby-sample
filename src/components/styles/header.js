@@ -2,6 +2,11 @@ import styled from 'styled-components'
 import { Link } from '../common'
 
 const HeaderWrapper = styled.header`
+  display: flex;
+  flex-direction: column;
+`
+
+const HeaderContent = styled.div`
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -58,6 +63,7 @@ const NavLink = styled(Link)`
 
 export {
   HeaderWrapper,
+  HeaderContent,
   LogoWrapper,
   MenuWrapper,
   AltMenu,

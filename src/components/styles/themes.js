@@ -18,6 +18,8 @@ export const themes = {
     green: '#00BF88',
     darkGreen: '#00a676',
     deepBlue: '#162332',
+    orange: '#e4714c',
+    red: '#c92c2c',
 
     // old styles
     backgroundColor: '#fff',
